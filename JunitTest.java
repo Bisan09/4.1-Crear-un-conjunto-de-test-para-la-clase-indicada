@@ -2,87 +2,63 @@ package TestJunit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.DisplayName;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
-import JunitTST.Tests;
+class MyString1Test {
 
-class JunitTest {
-	private MapService mapService;
-	
-	@Test
-	void testContarPalabras() {
-		assertEquals(5, JunitTST.Tests.contarPalabras("Jose Manuel es del Betis"));
-		
-	}
-	
-	@Test
-	void contarLetrasDiferentes() {
-		assertEquals(6, JunitTST.Tests.contarLetrasDiferentes("Josema"));
-	}
-	
-	@Test
-	void contarFrecuenciaPalabras() {
-		mapService.put("key1", 100);
-		assertEquals(2, JunitTST.Tests.contarFrecuenciaPalabras("Casa Casa"));
-	}
-	
-	import static org.junit.jupiter.api.Assertions.*;
+    @Test
+    void testConstructor() {
+        MyString1 myString = new MyString1("Hola mundo mundo");
+        assertEquals("Hola mundo mundo", myString.getStr());
+        assertEquals(3, myString.getWordCount());
+        assertFalse(myString.isPalindrome());
+    }
 
-	import java.util.Map;
-	import java.util.HashMap;
+    @Test
+    void testContarPalabras() {
+        assertEquals(4, MyString1.contarPalabras("Este es un test"));
+        assertEquals(0, MyString1.contarPalabras(""));
+        assertEquals(0, MyString1.contarPalabras(null));
+    }
 
-	import org.junit.jupiter.api.Test;
+    @Test
+    void testContarLetrasDiferentes() {
+        assertEquals(8, MyString1.contarLetrasDiferentes("Hola mundo"));
+        assertEquals(0, MyString1.contarLetrasDiferentes(""));
+    }
 
-	public class TestsTest {
+    @Test
+    void testContarFrecuenciaPalabras() {
+        Map<String, Integer> frecuencia = MyString1.contarFrecuenciaPalabras("Hola que tan tan bien estas?");
+        
+        assertEquals(1, frecuencia.get("hola")); 
+        assertEquals(2, frecuencia.get("tan"));  
+        assertEquals(1, frecuencia.get("que"));  
+        assertEquals(1, frecuencia.get("bien")); 
+        assertEquals(1, frecuencia.get("estas?")); 
+    }
 
-	    @Test
-	    void testContarPalabras() {
-	        assertEquals(3, Tests.contarPalabras("Hola mundo Java"));
-	        assertEquals(0, Tests.contarPalabras(""));
-	        assertEquals(0, Tests.contarPalabras(null));
-	        assertEquals(1, Tests.contarPalabras("Único"));
-	    }
+    @Test
+    void testContarFrecuenciaLetras() {
+        Map<Character, Integer> frecuencia = MyString1.contarFrecuenciaLetras("Resulta que es el el que insulta");
 
-	    @Test
-	    void testContarLetrasDiferentes() {
-	        assertEquals(4, Tests.contarLetrasDiferentes("Hola"));
-	        assertEquals(0, Tests.contarLetrasDiferentes(""));
-	        assertEquals(0, Tests.contarLetrasDiferentes(null));
-	        assertEquals(3, Tests.contarLetrasDiferentes("AaaBBbC"));
-	    }
-
-	    @Test
-	    void testContarFrecuenciaPalabras() {
-	        Map<String, Integer> esperado = new HashMap<>();
-	        esperado.put("hola", 2);
-	        esperado.put("mundo", 1);
-	        assertEquals(esperado, Tests.contarFrecuenciaPalabras("Hola mundo hola"));
-
-	        assertTrue(Tests.contarFrecuenciaPalabras("").isEmpty());
-	        assertTrue(Tests.contarFrecuenciaPalabras(null).isEmpty());
-	    }
-
-	    @Test
-	    void testContarFrecuenciaLetras() {
-	        Map<Character, Integer> esperado = new HashMap<>();
-	        esperado.put('h', 1);
-	        esperado.put('o', 2);
-	        esperado.put('l', 1);
-	        esperado.put('a', 1);
-	        assertEquals(esperado, Tests.contarFrecuenciaLetras("Hola o"));
-
-	        assertTrue(Tests.contarFrecuenciaLetras("").isEmpty());
-	        assertTrue(Tests.contarFrecuenciaLetras(null).isEmpty());
-	    }
-
-	    @Test
-	    void testEsPalindroma() {
-	        assertTrue(Tests.esPalindroma("Anilina"));
-	        assertTrue(Tests.esPalindroma("A Santa at NASA"));
-	        assertFalse(Tests.esPalindroma("Hola"));
-	        assertFalse(Tests.esPalindroma(""));
-	        assertFalse(Tests.esPalindroma(null));
-	    }
-	}
+        assertEquals(4, frecuencia.getOrDefault('e', 0));  
+        assertEquals(3, frecuencia.getOrDefault('s', 0)); 
+        assertEquals(3, frecuencia.getOrDefault('u', 0)); 
+        assertEquals(3, frecuencia.getOrDefault('l', 0));  
+        assertEquals(3, frecuencia.getOrDefault('t', 0));  
+        assertEquals(3, frecuencia.getOrDefault('a', 0)); 
+        assertEquals(2, frecuencia.getOrDefault('q', 0)); 
+        assertEquals(1, frecuencia.getOrDefault('r', 0)); 
+        assertEquals(1, frecuencia.getOrDefault('i', 0));  
+        assertEquals(1, frecuencia.getOrDefault('n', 0));
+    }
+    
+    @Test
+    void testEsPalindroma() {
+        assertTrue(MyString1.esPalindroma("Anita lava la tina"));
+        assertFalse(MyString1.esPalindroma("Hola mundo"));
+    }
 }
